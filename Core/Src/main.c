@@ -119,6 +119,11 @@ int main(void)
 	  	  printf("There was a problem programming the flash\r\n");
   }
 
+  // set flash programming bit in the flash cr
+  FLASH->CR = FLASH->CR | 0x01;
+
+  *(uint32_t *)0x08060028 = *(uint32_t *)"abcd";
+
   if(HAL_FLASH_Lock() == HAL_OK)
 	  printf("Locked flash!\r\n");
 
